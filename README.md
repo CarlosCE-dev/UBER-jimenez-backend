@@ -1,6 +1,4 @@
-# Adonis fullstack application
-
-This is the fullstack boilerplate for AdonisJs, it comes pre-configured with.
+# Socket APP
 
 1. Bodyparser
 2. Session
