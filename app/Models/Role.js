@@ -5,8 +5,12 @@ const Model = use('Model')
 
 class Role extends Model {
 
-    static get table () {
+    static get table() {
         return 'Role'
+    }
+
+    static get primaryKey() {
+        return 'Id'
     }
 
 }

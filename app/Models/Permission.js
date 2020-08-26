@@ -5,8 +5,12 @@ const Model = use('Model')
 
 class Permission extends Model {
 
-    static get table () {
+    static get table() {
         return 'Permission'
+    }
+
+    static get primaryKey() {
+        return 'Id'
     }
 }
 
