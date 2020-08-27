@@ -11,6 +11,11 @@ class Room extends Model {
     static get primaryKey() {
         return 'Id'
     }
+
+    Messages() {
+        return this.hasMany('App/Models/Message', 'Id', 'RoomId')
+    }
+
 }
 
 module.exports = Room

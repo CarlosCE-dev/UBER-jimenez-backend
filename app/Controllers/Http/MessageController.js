@@ -9,10 +9,15 @@ class MessageController {
     async index({ request, response }) {
         try {
 
-            const messages = await Message.pick(1);
-            console.log(messages);
+            const message = await Message
+            .query()
+            .where('status', 1)
+            .with('room', (builder) => {
+                builder.where('status', 1)
+            })
+            .fetch()
             
-            return response.send({ ok: true, mensaje: "Data fetch", data: messages });
+            return response.send({ ok: true, mensaje: "Data fetch", data: message });
 
         } catch (error) {
             console.log(error)

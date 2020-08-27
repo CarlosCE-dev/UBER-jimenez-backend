@@ -12,6 +12,10 @@ class Message extends Model {
     static get primaryKey() {
         return 'Id'
     }
+
+    Room() {
+        return this.belongsTo('App/Models/Room', 'RoomId', 'Id')
+    }
 }
 
 module.exports = Message

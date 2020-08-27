@@ -12,6 +12,14 @@ class Rating extends Model {
     static get primaryKey() {
         return 'Id'
     }
+
+    User(){
+        return this.belongsTo('App/Models/User', 'UserId', 'Id')
+    }
+
+    Rater() {
+        return this.belongsTo('App/Models/User', 'UserId', 'Id')
+    }
 }
 
 module.exports = Rating

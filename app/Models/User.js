@@ -1,8 +1,5 @@
 'use strict'
 
-/** @type {import('@adonisjs/framework/src/Hash')} */
-const Hash = use('Hash')
-
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
 const Model = use('Model')
 
@@ -11,8 +8,17 @@ class User extends Model {
   static get table() {
     return 'User'
   }
+  
   static get primaryKey() {
     return 'Id'
+  }
+
+  Role() {
+    return this.hasOne('App/Models/Role', 'RoleId', 'Id')
+  }
+
+  RoomsClient(){
+    return this.hasMany('App/Models/Room', 'Id', 'ClientId')
   }
 
   static boot() {

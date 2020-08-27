@@ -12,6 +12,10 @@ class Permission extends Model {
     static get primaryKey() {
         return 'Id'
     }
+
+    Role() {
+        return this.belongsTo('App/Models/Role', 'RoleId', 'Id')
+    }
 }
 
 module.exports = Permission

@@ -13,6 +13,13 @@ class Role extends Model {
         return 'Id'
     }
 
+    Permission() {
+        return this.hasOne('App/Models/Permission', 'PermissionId', 'Id')
+    }
+
+    User() {
+        return this.belongsTo('App/Models/User', 'UserId', 'Id')
+    }
 }
 
 module.exports = Role
