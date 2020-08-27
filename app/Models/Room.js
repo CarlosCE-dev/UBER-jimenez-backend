@@ -15,6 +15,7 @@ class Room extends Model {
     Messages() {
         return this.hasMany('App/Models/Message', 'Id', 'RoomId')
     }
+
 }
 
 module.exports = Room

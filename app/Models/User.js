@@ -17,6 +17,10 @@ class User extends Model {
     return this.hasOne('App/Models/Role', 'RoleId', 'Id')
   }
 
+  RoomsClient(){
+    return this.hasMany('App/Models/Room', 'Id', 'ClientId')
+  }
+
   static boot() {
     super.boot()
 

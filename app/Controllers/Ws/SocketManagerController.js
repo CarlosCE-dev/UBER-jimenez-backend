@@ -1,4 +1,5 @@
 'use strict'
+const Room = use('App/Models/Room');
 const { SocketUsers } = require('../../Classes/SocketUsers');
 
 const users = new SocketUsers();
@@ -14,12 +15,49 @@ class SocketManagerController {
   /**
    * Iniciar socket y guardar usuario
    */
-  onStart(){
-    const { id } = this.request.qs;
-    
-    const payload = { id, socketId: this.socket.id };
-    const user = users.addUser( payload );
-    this.socket.broadcast('message', user);
+  async onStart(){
+    try {
+      
+      const id = parseInt(this.request.qs.id);
+      
+      let rooms = [];
+      if ( id !== 3 ) {
+
+        if ( id === 2 ) {
+          rooms = await Room
+          .query()
+          .select('Id')
+          .where('ClientId', id)
+          .where('status', 1)
+          .fetch()
+          rooms = rooms.toJSON();
+        } else {
+          rooms = await Room
+          .query()
+          .select('Id')
+          .where('UserId', id)
+          .where('status', 1)
+          .fetch()
+          rooms = rooms.toJSON();
+        }
+      }
+
+      const roomsArray = rooms.map( r => r.Id );
+      
+      const payload = { id, socketId: this.socket.id, rooms: roomsArray };
+      const userAdded = users.addUser(payload);
+
+      console.log( users.getUsers());
+      
+
+      const userRoomOnline = users.findUsersOnline(roomsArray, id);
+      console.log(userRoomOnline);
+      
+      this.socket.emitTo('message', userAdded, userRoomOnline );
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   onMessage (message) {
@@ -27,7 +65,9 @@ class SocketManagerController {
   }
 
   onClose () {
-    console.log('onClose');
+    const id = parseInt(this.request.qs.id);
+    console.log("onClose", id);
+    users.removeUser( id );
   }
 
   onError () {

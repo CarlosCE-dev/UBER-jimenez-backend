@@ -19,8 +19,12 @@ class SocketUsers {
         return user;
     }
 
+    findUsersOnline(rooms, id){
+        return this.users.filter( u => u.id !== id && u.rooms.filter( r => rooms.includes(r) >= 0 )).map( r => r.socketId );
+    }
+
     removeUser(id) {
-        this.users = this.users.filter( u => u.id === id);
+        this.users = this.users.filter( u => u.id !== id);
         return this.users;
     }
 }
