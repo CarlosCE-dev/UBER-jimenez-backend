@@ -8,11 +8,14 @@ const Model = use('Model')
 
 class User extends Model {
 
-  static get table () {
+  static get table() {
     return 'User'
   }
+  static get primaryKey() {
+    return 'Id'
+  }
 
-  static boot () {
+  static boot() {
     super.boot()
 
     /**
@@ -25,7 +28,7 @@ class User extends Model {
       }
     })
   }
-  
+
 }
 
 module.exports = User

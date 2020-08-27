@@ -5,8 +5,11 @@ const Model = use('Model')
 
 class Room extends Model {
 
-    static get table () {
+    static get table() {
         return 'Room'
+    }
+    static get primaryKey() {
+        return 'Id'
     }
 }
 
