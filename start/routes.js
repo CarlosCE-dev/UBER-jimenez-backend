@@ -19,5 +19,9 @@ const Route = use('Route')
 Route.group(() => {
 
     Route.resource('message', 'MessageController');
+
+    Route.resource('room', 'RoomController');
+
+    Route.resource('user', 'UserController');
     
 }).prefix('api/v1');

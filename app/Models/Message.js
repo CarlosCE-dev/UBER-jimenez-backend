@@ -5,8 +5,16 @@ const Model = use('Model')
 
 class Message extends Model {
 
-    static get table () {
+    static get table() {
         return 'Message'
+    }
+
+    static get primaryKey() {
+        return 'Id'
+    }
+
+    Room() {
+        return this.belongsTo('App/Models/Room', 'RoomId', 'Id')
     }
 }
 

@@ -5,15 +5,19 @@ const Model = use('Model')
 
 class User extends Model {
 
-  static get hidden () {
-    return ['Password']
-  }
-
-  static get table () {
+  static get table() {
     return 'User'
   }
+  
+  static get primaryKey() {
+    return 'Id'
+  }
 
-  static boot () {
+  Role() {
+    return this.hasOne('App/Models/Role', 'RoleId', 'Id')
+  }
+
+  static boot() {
     super.boot()
 
     /**
@@ -26,7 +30,7 @@ class User extends Model {
       }
     })
   }
-  
+
 }
 
 module.exports = User
