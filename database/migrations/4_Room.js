@@ -7,7 +7,7 @@ class RoomSchema extends Schema {
   up () {
     this.create('Room', (table) => {
       table.increments('Id')
-      table.integer('UserId').notNullable().unsigned().references('Id').inTable('User')
+      table.integer('DeliveryId').notNullable().unsigned().references('Id').inTable('User')
       table.integer('ClientId').notNullable().unsigned().references('Id').inTable('User')
       table.datetime('Created')
       table.datetime('Updated')

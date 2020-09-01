@@ -16,6 +16,14 @@ class Room extends Model {
         return this.hasMany('App/Models/Message', 'Id', 'RoomId')
     }
 
+    Delivery() {
+        return this.belongsTo('App/Models/User', 'DeliveryId', 'Id')
+    }
+
+    Client() {
+        return this.belongsTo('App/Models/User', 'ClientId', 'Id')
+    }
+
 }
 
 module.exports = Room

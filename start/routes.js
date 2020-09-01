@@ -23,5 +23,12 @@ Route.group(() => {
     Route.resource('room', 'RoomController');
 
     Route.resource('user', 'UserController');
+
+    /* -------------------------------------------------------------------------- */
+    /*                                Rating Routes                               */
+    /* -------------------------------------------------------------------------- */
+    Route.get('rating/:id', 'RatingController.getRating');
+    Route.post('rating/:id', 'RatingController.setRating');
+
     
 }).prefix('api/v1');

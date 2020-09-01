@@ -35,7 +35,7 @@ class SocketManagerController {
           rooms = await Room
           .query()
           .select('Id')
-          .where('UserId', id)
+          .where('DeliveryId', id)
           .where('status', 1)
           .fetch()
           rooms = rooms.toJSON();
@@ -47,11 +47,7 @@ class SocketManagerController {
       const payload = { id, socketId: this.socket.id, rooms: roomsArray };
       const userAdded = users.addUser(payload);
 
-      console.log( users.getUsers());
-      
-
       const userRoomOnline = users.findUsersOnline(roomsArray, id);
-      console.log(userRoomOnline);
       
       this.socket.emitTo('message', userAdded, userRoomOnline );
 
@@ -66,7 +62,6 @@ class SocketManagerController {
 
   onClose () {
     const id = parseInt(this.request.qs.id);
-    console.log("onClose", id);
     users.removeUser( id );
   }
 
