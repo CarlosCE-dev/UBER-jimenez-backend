@@ -8,8 +8,9 @@ class RatingSchema extends Schema {
     this.create('Rating', (table) => {
       table.increments('Id')
       table.integer('Value').notNullable().comment('1=Very bad, 2=Bad, 3=Normal, 4=Good, 5=Very good')
-      table.integer('RaterId').notNullable().unsigned().references('Id').inTable('User')
-      table.integer('UserId').notNullable().unsigned().references('Id').inTable('User')
+      table.string('Comment', 300).nullable()
+      table.integer('DeliveryId').notNullable().unsigned().references('Id').inTable('User')
+      table.integer('ClienteId').notNullable().unsigned().references('Id').inTable('User')
       table.datetime('Created')
       table.datetime('Updated')
       table.boolean('Status').notNullable().defaultTo(true)
